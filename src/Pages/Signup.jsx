@@ -31,18 +31,31 @@ const Signup = () => {
     createUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
       console.log(loggedUser);
+
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
-          console.log("user profile info updated");
-          reset();
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "User created successfully.",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate("/");
+          const saveUser = { name: data.name, photo:data.photoURL, email: data.email , "role":"student"};
+          fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(saveUser),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.insertedId) {
+                reset();
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "User created successfully.",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate("/");
+              }
+            });
         })
         .catch((error) => console.log(error));
     });
@@ -82,6 +95,7 @@ const Signup = () => {
                 </label>
                 <input
                   type="text"
+                  name="photoURL"
                   {...register("photoURL", { required: true })}
                   placeholder="Photo URL"
                   className="input input-bordered"
@@ -116,7 +130,8 @@ const Signup = () => {
                       required: true,
                       minLength: 6,
                       maxLength: 20,
-                      pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                      pattern:
+                        /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
                     })}
                     placeholder="Password"
                     className="input input-bordered"
@@ -142,7 +157,8 @@ const Signup = () => {
                 )}
                 {errors.password?.type === "pattern" && (
                   <p className="text-red-600">
-                    Password must have one uppercase letter, one lowercase letter, one number, and one special character.
+                    Password must have one uppercase letter, one lowercase
+                    letter, one number, and one special character.
                   </p>
                 )}
                 <label className="label">
@@ -159,13 +175,16 @@ const Signup = () => {
                   type="password"
                   {...register("confirmPassword", {
                     required: true,
-                    validate: (value) => value === password || "Passwords do not match",
+                    validate: (value) =>
+                      value === password || "Passwords do not match",
                   })}
                   placeholder="Confirm Password"
                   className="input input-bordered"
                 />
                 {errors.confirmPassword && (
-                  <span className="text-red-600">{errors.confirmPassword.message}</span>
+                  <span className="text-red-600">
+                    {errors.confirmPassword.message}
+                  </span>
                 )}
               </div>
               <div className="form-control mt-6">

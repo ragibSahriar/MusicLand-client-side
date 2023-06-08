@@ -3,6 +3,9 @@ import Home from "../Home/Home";
 import Main from "../Main/Main";
 import Signup from "../Pages/Signup";
 import Login from "../Pages/Login";
+import MyCart from "../Pages/Dashboard/MyCart";
+import Dashboard from "../Layout/Dashboard";
+import AllUsers from "../Pages/Dashboard/AllUsers";
 
 
 export const router = createBrowserRouter([
@@ -25,4 +28,17 @@ export const router = createBrowserRouter([
         },
       ],
     },
+    { path: 'dashboard',
+     element: <Dashboard></Dashboard>,
+    children:[
+      {
+        path:'mycart',
+        element: <MyCart></MyCart>
+      },
+      {
+        path:'allUsers',
+        element: <AllUsers></AllUsers>
+      },
+    ]
+    }
   ]);
