@@ -6,6 +6,7 @@ import Login from "../Pages/Login";
 import MyCart from "../Pages/Dashboard/MyCart";
 import Dashboard from "../Layout/Dashboard";
 import AllUsers from "../Pages/Dashboard/AllUsers";
+import Instructor from "../Instructor/Instructor";
 
 
 export const router = createBrowserRouter([
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
         {
           path: "/login",
           element: <Login />,
+        },
+        {
+          path:'/instructor',
+          element: <Instructor></Instructor>
         },
       ],
     },

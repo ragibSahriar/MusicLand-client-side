@@ -23,7 +23,7 @@ const Navbar = () => {
             <Link to="/" className="font-sans font-roboto  font-semibold  hover:text-amber-900 hover:font-bold">
             Home
             </Link>
-            <Link to="blog" className="font-sans font-roboto  font-semibold hover:text-green-700">Instructor</Link>
+            <Link to="/instructor" className="font-sans font-roboto  font-semibold hover:text-green-700">Instructor</Link>
             <Link to="blog" className="font-sans font-roboto  font-semibold hover:text-green-700">Classes</Link>
             <Link to="/dashboard" className="font-sans font-roboto  font-semibold hover:text-green-700">Dashboard</Link>
         </div>
