@@ -7,7 +7,7 @@ const Instructor = () => {
   const instructors = users.filter(user => user.role === 'instructor');
 
   return (
-    <div>
+    <div className='mx-auto container'>
         {
             instructors.map(instructor=> <Card
                 key={instructor._id} instructor={instructor}

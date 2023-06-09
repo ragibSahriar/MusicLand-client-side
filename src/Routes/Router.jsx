@@ -7,6 +7,9 @@ import MyCart from "../Pages/Dashboard/MyCart";
 import Dashboard from "../Layout/Dashboard";
 import AllUsers from "../Pages/Dashboard/AllUsers";
 import Instructor from "../Instructor/Instructor";
+import AddClass from "../hooks/Addclass";
+import MyClasses from "../Pages/Dashboard/instructor/MyClasses";
+import ManageClass from "../Layout/Admin/ManageClass";
 
 
 export const router = createBrowserRouter([
@@ -43,6 +46,18 @@ export const router = createBrowserRouter([
       {
         path:'allUsers',
         element: <AllUsers></AllUsers>
+      },
+      {
+        path:'addClass',
+        element: <AddClass></AddClass>
+      },
+      {
+        path:'myClass',
+        element: <MyClasses></MyClasses>
+      },
+      {
+        path:'manageclass',
+        element: <ManageClass></ManageClass>
       },
     ]
     }

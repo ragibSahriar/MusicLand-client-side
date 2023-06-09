@@ -3,6 +3,7 @@ import { FaUsers,FaPlusSquare } from 'react-icons/fa';
 const Dashboard = () => {
   // TODO LOAD DATA FROM THE SERVER TO HAVE DYNAMIC ISADMIN BASED ON DATA
   const isAdmin = true;
+  
   return (
     <div className="drawer drawer-mobile ">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -30,6 +31,9 @@ const Dashboard = () => {
                 <NavLink to="/dashboard/allUsers" className='text-black'><FaUsers></FaUsers>Manage Users</NavLink>
               </li>
               <li>
+                <NavLink to="/dashboard/manageclass" className='text-black'><FaUsers></FaUsers>Manage Users</NavLink>
+              </li>
+              <li>
                 {/* <NavLink to="/dashboard/mycart"><FaShoppingCart></FaShoppingCart> My Cart
                             <span className="badge inl badge-secondary">+{cart?.length || 0}</span>
                         </NavLink> */}
@@ -52,13 +56,13 @@ const Dashboard = () => {
           ) : (
             <>
               <li>
-                <NavLink to="/dashboard/home">User Home</NavLink>
+                <NavLink to="/dashboard/home">Instructor</NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/reservations"> Reservations</NavLink>
+                <NavLink to="/dashboard/addClass">Add a Class</NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/history"> Payment History</NavLink>
+                <NavLink to="/dashboard/myClass"> My Classes</NavLink>
               </li>
               <li>
                 {/* <NavLink to="/dashboard/mycart"><FaShoppingCart></FaShoppingCart> My Cart

@@ -123,7 +123,6 @@ const AllUsers = () => {
                     x
                   </button>
                 </td>
-                <td></td>
               </tr>
             ))}
           </tbody>

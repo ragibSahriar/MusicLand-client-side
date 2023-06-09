@@ -1,5 +1,5 @@
 const FacebookLogin = () => {
-import { FacebookAuthProvider } from 'firebase/auth';
+
     const handleFacebookLogin = () => {
       const provider = new firebase.auth.FacebookAuthProvider();
       firebase.auth().signInWithPopup(provider)

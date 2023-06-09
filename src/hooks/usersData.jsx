@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
 
 const usersData = () => {
     const { data: users = [],isLoading: loading, refetch } = useQuery(['users'], async () => {
