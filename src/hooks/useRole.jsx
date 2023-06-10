@@ -1,30 +1,23 @@
-
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from "react";
 import { AuthContext } from './../AuthProvider/Authprovider';
+import { useQuery } from "@tanstack/react-query";
+
 
 
 const useRole = () => {
-  const { user } = useContext(AuthContext);
-  const [data, setData] = useState({}); // State to store the role data
+  const { user } = useContext(AuthContext)
+  const { data = {} } = useQuery({
+    queryKey: ["role", user?.email],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:5000/role?email=${user?.email}`)
 
-  useEffect(() => {
-    const fetchRoleData = async () => {
-      try {
-        const response = await fetch(`/role?email=${user?.email}`);
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        console.error("Error fetching role data:", error);
-        setData({}); // Handle error by setting data to an empty object or handle it in an appropriate way
-      }
-    };
-
-    if (user?.email) {
-      fetchRoleData();
-    }
-  }, [user]);
-
-  return { data };
+      
+      return  res.json()
+      
+    },
+  });
+console.log(data);
+  return data.role ;
 };
 
 export default useRole;

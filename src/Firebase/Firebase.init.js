@@ -1,13 +1,13 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 const firebaseConfig = {
-  apiKey: "AIzaSyAlgxbi3up84DwmGvrbHpogltAEEqFDUMY",
-  authDomain: "musiccloud-dd4b3.firebaseapp.com",
-  projectId: "musiccloud-dd4b3",
-  storageBucket: "musiccloud-dd4b3.appspot.com",
-  messagingSenderId: "614434260645",
-  appId: "1:614434260645:web:bceb72d3f1f169dc2fef4c",
-  measurementId: "G-D76J0JQHXJ"
+  apiKey:import.meta.env.VITE_apiKey,
+  authDomain:import.meta.env.VITE_authDomain,
+  projectId:import.meta.env.VITE_projectId,
+  storageBucket:import.meta.env.VITE_storageBucket,
+  messagingSenderId:import.meta.env.VITE_messagingSenderId,
+  appId:import.meta.env.VITE_appId,
+  measurementId:import.meta.env.VITE_measurementId
 };
 
 // Initialize Firebase

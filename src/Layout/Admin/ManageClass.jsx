@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { FaCheck, FaComments, FaTimes } from 'react-icons/fa';
 import AllClassHook from '../../hooks/AllClassHook';
+import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const ManageClass = () => {
   const [data, refetch] = AllClassHook();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [textInput, setTextInput] = useState('');
+
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -27,37 +30,37 @@ const ManageClass = () => {
     closeModal();
   };
 
+  const handleFeedback = async (classObj, feedback) => {
+    if (!feedback) {
+      alert("Feedback cannot be empty");
+      return;
+    }
+    try {
+      await axios.post(`http://localhost:5000/classes/feedback/${classObj._id}`, {
+        feedback,
+      });
+      refetch(); // Refetch the updated data
+    } catch (error) {
+      console.error("Error sending feedback:", error);
+    }
+  };
+
+  const handleApprove = classObj => {
+    fetch(`http://localhost:5000/addClass/approved/${classObj._id}`, {
+      method: 'PATCH',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount) {
+          refetch();
+        }
+      });
+  };
+
   return (
     <div>
-      <style>{`
-        .modal-overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.5);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .modal-content {
-          background-color: white;
-          padding: 20px;
-          max-width: 400px;
-          border-radius: 4px;
-        }
-
-        .modal-content input[type="text"] {
-          width: 100%;
-          padding: 8px;
-          font-size: 16px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          margin-bottom: 12px;
-        }
-      `}</style>
+      <style>{/* CSS styles here */}</style>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {data.map((classObj) => (
@@ -70,27 +73,24 @@ const ManageClass = () => {
               alt={classObj.name}
               className="w-full h-32 object-cover mb-4"
             />
-            <h2 className="text-xl font-bold mb-2">{classObj.name}</h2>
-            <p className="mb-2">Instructor: {classObj.instructorName}</p>
-            <p className="mb-2">Email: {classObj.instructorEmail}</p>
-            <p className="mb-2">Available seats: {classObj.availableSeats}</p>
+            <h2 className="text-xl font-bold mb-2">{classObj.instructor_name}</h2>
+        
+            <p className="mb-2">Email: {classObj.email}</p>
+            <p className="mb-2">Available seats: {classObj.seats}</p>
             <p className="mb-2">Price: ${classObj.price}</p>
             <p className="mb-2">Status: {classObj.status}</p>
             <div className="flex">
               <>
-                <button className="btn btn-sm btn-outline mr-2">
+                <button onClick={() => handleApprove(classObj)} className="btn btn-sm btn-outline mr-2">
                   <FaCheck className="text-green-500" />
                 </button>
                 <button className="btn btn-sm btn-outline mr-2">
                   <FaTimes className="text-red-500" />
                 </button>
               </>
-              <button
-                className="btn btn-sm btn-primary"
-                onClick={openModal}
-              >
-                <FaComments />_
-                 feedback
+              <button className="btn btn-sm btn-primary" onClick={openModal}>
+                <FaComments />
+                Feedback
               </button>
             </div>
           </div>
@@ -100,19 +100,26 @@ const ManageClass = () => {
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h2>Modal Title</h2>
+            <h2 className="font-bold">Feedback</h2>
             <form onSubmit={handleSubmit}>
-              <label htmlFor="text-input">Enter your text:</label>
               <input
+                placeholder="Write your feedback here"
                 type="text"
                 id="text-input"
                 value={textInput}
                 onChange={handleTextInputChange}
                 style={{ width: '100%', height: '60px', fontSize: '18px' }}
               />
-              <button type="submit">Submit</button>
+              <button onClick={() => handleFeedback(classObj)}  className="btn bg-green-600" type="submit">
+                Submit
+              </button>
             </form>
-            <button onClick={closeModal}>Close</button>
+            <button
+              className="px-2 py-1 rounded-full text-white mt-1 bg-red-700"
+              onClick={closeModal}
+            >
+              X
+            </button>
           </div>
         </div>
       )}
