@@ -8,16 +8,14 @@ const PopularClass = () => {
         return res.json();
       });
     return (
-        <div>
-            <div>
-      <ul>
+    <div className='container mx-auto'>
+          <h2 className='text-center text-4xl  p-3 mb-2 border-b-2'>- PUPULAR CLASSES -</h2>
+      <div className='flex flex-wrap container mx-auto space-x-4 space-y-4'>
         {classes.map((classItem) => (
           <ClassCard key={classItem._id} classItem={classItem}></ClassCard>
         ))}
-      </ul>
-      {/* <button onClick={refetch}>Refresh</button> */}
-    </div>
         </div>
+    </div>
     );
 };
 

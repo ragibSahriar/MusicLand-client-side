@@ -109,7 +109,7 @@ const Dashboard = () => {
           </label>
           <Outlet></Outlet>
         </div>
-        <div className="drawer-side bg-sky-500 text-white">
+        <div className="drawer-side bg-zinc-800 text-white">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80">
             {role === "admin" && admin}
