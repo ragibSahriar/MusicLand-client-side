@@ -8,7 +8,6 @@ const ClassCard = ({classItem}) => {
           <h2 className="card-title"></h2>
           <p>{classItem.courseName}</p>
           <p>👩‍🎓Students: {classItem.seats}</p>
-          
         </div>
       </div>
     );
