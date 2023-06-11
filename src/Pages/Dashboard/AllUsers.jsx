@@ -117,7 +117,7 @@ const AllUsers = () => {
                 </td>
                 <td>
                   <button
-                    onClick={() => handleDelete(user)}
+                    
                     className="btn btn-ghost bg-red-600 text-white"
                   >
                     x

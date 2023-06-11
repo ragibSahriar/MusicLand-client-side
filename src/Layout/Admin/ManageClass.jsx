@@ -8,15 +8,17 @@ const ManageClass = () => {
   const [data, refetch] = AllClassHook();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [textInput, setTextInput] = useState('');
+  const [classObj, setClassObj] = useState(null);
 
-
-  const openModal = () => {
+  const openModal = (classObj) => {
     setIsModalOpen(true);
+    setClassObj(classObj);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
     setTextInput('');
+    setClassObj(null);
   };
 
   const handleTextInputChange = (event) => {
@@ -26,17 +28,22 @@ const ManageClass = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('Submitted text:', textInput);
-    // You can perform additional actions with the submitted text
+    if (!classObj || !classObj._id) {
+      console.error("Invalid class object");
+      return;
+    }
+    handleFeedback(classObj._id, textInput); // Pass classObj._id to handleFeedback
     closeModal();
   };
 
-  const handleFeedback = async (classObj, feedback) => {
+  const handleFeedback = async (id, feedback) => {
+    console.log(id);
     if (!feedback) {
       alert("Feedback cannot be empty");
       return;
     }
     try {
-      await axios.post(`http://localhost:5000/classes/feedback/${classObj._id}`, {
+      await axios.post(`http://localhost:5000/addClass/feedback/${id}`, {
         feedback,
       });
       refetch(); // Refetch the updated data
@@ -45,7 +52,7 @@ const ManageClass = () => {
     }
   };
 
-  const handleApprove = classObj => {
+  const handleApprove = (classObj) => {
     fetch(`http://localhost:5000/addClass/approved/${classObj._id}`, {
       method: 'PATCH',
     })
@@ -58,7 +65,7 @@ const ManageClass = () => {
       });
   };
 
-  const handleDeny = classObj => {
+  const handleDeny = (classObj) => {
     fetch(`http://localhost:5000/addClass/deny/${classObj._id}`, {
       method: 'PATCH',
     })
@@ -77,17 +84,14 @@ const ManageClass = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {data.map((classObj) => (
-          <div
-            key={classObj._id}
-            className="bg-white p-4 shadow-md rounded-lg"
-          >
+          <div key={classObj._id} className="bg-white p-4 shadow-md rounded-lg">
             <img
               src={classObj.classImg}
               alt={classObj.name}
               className="w-full h-32 object-cover mb-4"
             />
             <h2 className="text-xl font-bold mb-2">{classObj.instructor_name}</h2>
-        
+
             <p className="mb-2">Email: {classObj.email}</p>
             <p className="mb-2">Available seats: {classObj.seats}</p>
             <p className="mb-2">Price: ${classObj.price}</p>
@@ -97,11 +101,11 @@ const ManageClass = () => {
                 <button onClick={() => handleApprove(classObj)} className="btn btn-sm btn-outline mr-2">
                   <FaCheck className="text-green-500" />
                 </button>
-                <button onClick={() => handleDeny(classObj)}  className="btn btn-sm btn-outline mr-2">
+                <button onClick={() => handleDeny(classObj)} className="btn btn-sm btn-outline mr-2">
                   <FaTimes className="text-red-500" />
                 </button>
               </>
-              <button className="btn btn-sm btn-primary" onClick={openModal}>
+              <button className="btn btn-sm btn-primary" onClick={() => openModal(classObj)}>
                 <FaComments />
                 Feedback
               </button>
@@ -110,7 +114,7 @@ const ManageClass = () => {
         ))}
       </div>
 
-      {isModalOpen && (
+      {isModalOpen && classObj && (
         <div className="modal-overlay">
           <div className="modal-content">
             <h2 className="font-bold">Feedback</h2>
@@ -123,7 +127,7 @@ const ManageClass = () => {
                 onChange={handleTextInputChange}
                 style={{ width: '100%', height: '60px', fontSize: '18px' }}
               />
-              <button onClick={() => handleFeedback(classObj)}  className="btn bg-green-600" type="submit">
+              <button className="btn bg-green-600" type="submit">
                 Submit
               </button>
             </form>

@@ -1,36 +1,37 @@
 import { FaBars } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
-import useRole from "../hooks/useRole";
+// import useRole from "../hooks/useRole";
+import useRoleChange from "../hooks/useRole";
 
 const Dashboard = () => {
-  const role = useRole();
-  console.log(role);
+  const {data} = useRoleChange();
+  console.log(data);
 
   const admin = (
     <>
-      <h1 className="text-center">Admin Panel</h1>
+      <h1 className="text-center text-orange-500 text-4xl mt-10">⚡ <br /> Admin Panel</h1>
       <div className="divider"></div>
       <li>
         <NavLink
           to="/dashboard/allUsers"
           className={({ isActive }) =>
-            isActive ? "text-gray" : "default"
+            isActive ? "text-orange-300" : "default"
           }
         >
-          Manage User
+          👥Manage User
         </NavLink>
       </li>
       <li>
         <NavLink
           to="/dashboard/manageclass"
           className={({ isActive }) =>
-            isActive ? "text-white" : "default"
+            isActive ? "text-orange-300" : "default"
           }
           >
-          Manage Class
+          🏛Manage Class
         </NavLink>
       </li>
-          <li><NavLink to="/">Home</NavLink></li>
+          <li><NavLink to="/">🏠Home</NavLink></li>
     </>
   );
   const instructor = (
@@ -70,27 +71,37 @@ const Dashboard = () => {
     </>
   );
   const student = (
-    <>
-      <h1 className="text-center">Student Panel</h1>
+     <>
+      <h1 className="text-center">student</h1>
       <div className="divider"></div>
       <li>
         <NavLink
-          to="/dashboard/selected"
+          to="/"
           className={({ isActive }) =>
             isActive ? "text-[#f1961f]" : "default"
           }
         >
-          Selected class
+          ➕Add Class
         </NavLink>
       </li>
       <li>
         <NavLink
-          to="/dashboard/enrolled"
+          to="/"
           className={({ isActive }) =>
             isActive ? "text-[#f1961f]" : "default"
           }
         >
-          Enrolled class
+          🏛My Class
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive ? "text-[#f1961f]" : "default"
+          }
+        >
+          🏠HOME
         </NavLink>
       </li>
     </>
@@ -112,10 +123,11 @@ const Dashboard = () => {
         <div className="drawer-side bg-zinc-800 text-white">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80">
-            {role === "admin" && admin}
-            {role === "instructor" && instructor}
-            {role === "student" && student}
+            {data.role === "admin" && admin}
+            {data.role === "instructor" && instructor}
+            {data.role === "student" && student}
           </ul>
+        
         </div>
       </div>
     </div>

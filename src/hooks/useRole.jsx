@@ -4,20 +4,42 @@ import { useQuery } from "@tanstack/react-query";
 
 
 
-const useRole = () => {
-  const { user } = useContext(AuthContext)
-  const { data = {} } = useQuery({
-    queryKey: ["role", user?.email],
-    queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/role?email=${user?.email}`)
+// const useRole = () => {
+//   const { user } = useContext(AuthContext)
+//   const { data = {} } = useQuery({
+//     queryKey: ["role", !!user?.email],
+//     queryFn: async () => {
+//       const res = await fetch(`http://localhost:5000/role?email=${user?.email}`)
 
       
-      return  res.json()
+//       return  res.json()
       
+//     },
+//   });
+//   console.log(data);
+//   return data.role ;
+// };
+
+// export default useRole;
+
+
+
+const useRoleChange = () => {
+  const { user, loading } = useContext(AuthContext);
+  const { data = {} } = useQuery({
+    queryKey: ["role", !!user?.email],
+    enabled: !loading,
+
+    queryFn: async () => {
+      const res = await fetch(
+        `http://localhost:5000/role?email=${user?.email}`
+      );
+      const result = await res.json();
+      console.log(result);
+      return result;
     },
   });
-console.log(data);
-  return data.role ;
-};
 
-export default useRole;
+  return { data };
+};
+export default useRoleChange;
