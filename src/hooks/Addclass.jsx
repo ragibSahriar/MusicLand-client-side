@@ -46,8 +46,8 @@ const AddClass = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className=" w-full rounded-md shadow-lg">
+    <div className="min-h-screen flex items-center justify-center bg-gray-800">
+      <div className=" w-full  rounded-md shadow-lg">
         <div className="bg-zinc-800 px-6 py-4 rounded-t-md">
           <h2 className="text-xl font-bold text-white text-center">
             Add Class
@@ -55,12 +55,12 @@ const AddClass = () => {
         </div>
         <form
           onSubmit={handleSubmit(handleAddClass)}
-          className="p-6 bg-blue-100">
+          className="p-6 bg-zinc-700">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="flex flex-col">
               <label
                 htmlFor="instructorName"
-                className="text-gray-700 font-bold mb-2">
+                className="text-white font-bold mb-2">
                 Instructor Name:
               </label>
               <input
@@ -71,7 +71,7 @@ const AddClass = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label htmlFor="email" className="text-gray-700 font-bold mb-2">
+              <label htmlFor="email" className="text-white font-bold mb-2">
                 Email:
               </label>
               <input
@@ -84,7 +84,7 @@ const AddClass = () => {
             <div className="flex flex-col">
               <label
                 htmlFor="courseName"
-                className="text-gray-700 font-bold mb-2">
+                className="text-white font-bold mb-2">
                 Course Name:
               </label>
               <input
@@ -97,7 +97,7 @@ const AddClass = () => {
             <div className="flex flex-col">
               <label
                 htmlFor="classImg"
-                className="text-gray-700 font-bold mb-2">
+                className="text-white font-bold mb-2">
                 Class Image URL:
               </label>
               <input
@@ -108,7 +108,7 @@ const AddClass = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label htmlFor="seats" className="text-gray-700 font-bold mb-2">
+              <label htmlFor="seats" className="text-white font-bold mb-2">
                 Seats:
               </label>
               <input
@@ -119,7 +119,7 @@ const AddClass = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label htmlFor="price" className="text-gray-700 font-bold mb-2">
+              <label htmlFor="price" className="text-white font-bold mb-2">
                 Price:
               </label>
               <input
@@ -134,7 +134,7 @@ const AddClass = () => {
           <div className="flex justify-end mt-6">
             <button
               type="submit"
-              className="bg-orange-700 hover:bg-orange-400 text-white font-bold py-2 px-4 border-b-4 border-white rounded-xl">
+              className="bg-zinc-500 text-orange-500 w-full py-1 text-2xl rounded">
               Submit
             </button>
           </div>
