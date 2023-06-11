@@ -26,7 +26,7 @@ const AllClassSection = ({ classes }) => {
                 Swal.fire({
                   position: "center",
                   icon: "success",
-                  title: "Class successfully added to your Class Page",
+                  title: "Class successfully added to your Class Page!",
                   showConfirmButton: false,
                   timer: 1500,
                 });
