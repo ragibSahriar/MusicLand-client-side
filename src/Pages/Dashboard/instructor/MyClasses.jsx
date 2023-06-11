@@ -1,30 +1,36 @@
-
-import { useQuery } from '@tanstack/react-query';
-import ClassCard from './ClassCard';
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../../AuthProvider/Authprovider';
+import MyClassCard from './MyClassCard'; // Import the MyClassCard component
 
 const MyClasses = () => {
-  const { data: classes = [], isLoading: loading, refetch } = useQuery(['classes'], async () => {
-    const res = await fetch('http://localhost:5000/classes');
-    return res.json();
-  });
+  const [classes, setClasses] = useState([]);
+  const { user } = useContext(AuthContext);
 
-  // Use the fetched data in your component
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/addClass/myclass/${user?.email}`);
+        if (!response.ok) {
+          throw new Error('Error fetching classes');
+        }
+        const data = await response.json();
+        setClasses(data);
+      } catch (error) {
+        console.error('Error fetching classes:', error);
+        // Handle error, e.g., show an error message
+      }
+    };
 
-  if (classes.length === 0) {
-    return <div>No classes found.</div>;
-  }
+    if (user?.email) {
+      fetchData();
+    }
+  }, [user]);
 
   return (
-    <div>
-      <ul>
-        {classes.map((classItem) => (
-          <ClassCard key={classItem._id} classItem={classItem}></ClassCard>
-        ))}
-      </ul>
-      {/* <button onClick={refetch}>Refresh</button> */}
+    <div className='grid grid-cols-3 container mx-auto mt-5'>
+      {classes.map((classItem) => (
+        <MyClassCard key={classItem.id} classItem={classItem} />
+      ))}
     </div>
   );
 };

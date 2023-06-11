@@ -30,7 +30,7 @@ const Dashboard = () => {
           Manage Class
         </NavLink>
       </li>
-          <li><NavLink>Home</NavLink></li>
+          <li><NavLink to="/">Home</NavLink></li>
     </>
   );
   const instructor = (
@@ -39,22 +39,32 @@ const Dashboard = () => {
       <div className="divider"></div>
       <li>
         <NavLink
-          to="/dashboard/add_class"
+          to="/dashboard/addClass"
           className={({ isActive }) =>
             isActive ? "text-[#f1961f]" : "default"
           }
         >
-          Add Class
+          ➕Add Class
         </NavLink>
       </li>
       <li>
         <NavLink
-          to="/dashboard/my_class"
+          to="/dashboard/myClass"
           className={({ isActive }) =>
             isActive ? "text-[#f1961f]" : "default"
           }
         >
-          My Class
+          🏛My Class
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive ? "text-[#f1961f]" : "default"
+          }
+        >
+          🏠HOME
         </NavLink>
       </li>
     </>

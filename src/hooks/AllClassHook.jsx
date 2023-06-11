@@ -4,7 +4,7 @@ const AllClassHook = () => {
   const { data = [], refetch } = useQuery({
     queryKey: ["addClass"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/addClass");
+      const res = await fetch("http://localhost:5000/classes");
       const result = await res.json();
       return result;
     },

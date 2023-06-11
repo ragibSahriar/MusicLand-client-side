@@ -58,6 +58,19 @@ const ManageClass = () => {
       });
   };
 
+  const handleDeny = classObj => {
+    fetch(`http://localhost:5000/addClass/deny/${classObj._id}`, {
+      method: 'PATCH',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount) {
+          refetch();
+        }
+      });
+  };
+
   return (
     <div>
       <style>{/* CSS styles here */}</style>
@@ -84,7 +97,7 @@ const ManageClass = () => {
                 <button onClick={() => handleApprove(classObj)} className="btn btn-sm btn-outline mr-2">
                   <FaCheck className="text-green-500" />
                 </button>
-                <button className="btn btn-sm btn-outline mr-2">
+                <button onClick={() => handleDeny(classObj)}  className="btn btn-sm btn-outline mr-2">
                   <FaTimes className="text-red-500" />
                 </button>
               </>
