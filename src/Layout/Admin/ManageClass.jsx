@@ -137,8 +137,7 @@ const ManageClass = () => {
             >
               X
             </button>
-          </div>
-        </div>
+          </div> </div>
       )}
     </div>
   );
