@@ -12,9 +12,9 @@ const Home = () => {
             <Zoom>
             <Slider></Slider>
             </Zoom>
-           <JackInTheBox>
+           <Fade>
            <PopularClass></PopularClass>
-           </JackInTheBox>
+           </Fade >
            <Fade>
            <div>
             <h2 className='text-4xl text-center my-10 border-y py-10'>Popular Popular Instructors</h2>
