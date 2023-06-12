@@ -11,6 +11,7 @@ import AddClass from "../hooks/Addclass";
 import MyClasses from "../Pages/Dashboard/instructor/MyClasses";
 import ManageClass from "../Layout/Admin/ManageClass";
 import Classes from "../Classes/Classes";
+import Error from "../Error";
 
 
 export const router = createBrowserRouter([
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
         {
           path:'/classes',
           element: <Classes></Classes>
+        },
+        {
+          path:'/*',
+          element: <Error></Error>
         },
       ],
     },
