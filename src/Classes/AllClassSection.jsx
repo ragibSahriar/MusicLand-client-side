@@ -7,57 +7,58 @@ import useRoleChange from "../hooks/useRole";
 const AllClassSection = ({ classes }) => {
     const {data}= useRoleChange()
     const {user} = useContext(AuthContext)
-    
     const handleSelect = (classes) => {
-        if (user && user.email) {
-          const cartItem = {
-            classId: classes._id,
-            name: classes.courseName,
-            classImg: classes.classImg,
-            price: classes.price,
-            seats: classes.seats,
-            email: user.email,
-          };
-      
-          axios.post("http://localhost:5000/classCarts", cartItem)
-            .then((response) => {
-              console.log(response.classes);
-              if (response.data.insertedId) {
-                Swal.fire({
-                  position: "center",
-                  icon: "success",
-                  title: "Class successfully added to your Class Page!",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-              } else if (response.classes.message) {
-                Swal.fire({
-                  position: "center",
-                  icon: "error",
-                  title: "Class already added",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-              }
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        } else {
-          Swal.fire({
-            title: "Please login to select the class.",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Login now!",
-          }).then((result) => {
-            if (result.isConfirmed) {
-            //   navigate("/login", { state: { from: location } });
+      if (user && user.email) {
+        const cartItem = {
+          classId: classes._id,
+          name: classes.courseName,
+          instructor: classes.instructor_name,
+          seats: classes.seats,
+          price: classes.price,
+          email: user.email,
+        };
+    
+        axios.post("http://localhost:5000/classCarts", cartItem)
+          .then((response) => {
+            console.log(response.data);
+            if (response.data.insertedId) {
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Class successfully added to your Class Page!",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            } else if (response.data.message) {
+              Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "Class already added",
+                showConfirmButton: false,
+                timer: 1500,
+              });
             }
+          })
+          .catch((error) => {
+            console.error(error);
           });
-        }
-      };
+      } else {
+        Swal.fire({
+          title: "Please login to select the class.",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Login now!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            //   navigate("/login", { state: { from: location } });
+          }
+        });
+      }
+    };
+    
+    
 
   return (
     <div className="card card-compact w-96 bg-base-100 shadow-xl">
