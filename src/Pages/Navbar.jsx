@@ -16,7 +16,8 @@ const Navbar = () => {
     return (
         <nav className="mx-auto space-x-4 container mx-auto border-b border-zinc-800 p-2  m-1">
        <nav className="   p-1 rounded text-black   flex justify-around mx-auto items-center ">
-        <div className="">
+        <div className="flex space-x-2">
+          <img className="w-8 rounded-full" src="https://th.bing.com/th/id/R.ee91ecf276e355eae3ff467f89941cfa?rik=IYimY4UTWAUgSw&pid=ImgRaw&r=0" alt="" />
           <a className="text-xl">musicCloud</a>
         </div>
         <div className=" flex items-center mx-auto space-x-4">

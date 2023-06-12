@@ -1,16 +1,18 @@
 
 import { Outlet } from "react-router-dom";
 import Navbar from './../Pages/Navbar';
-import { Slide } from "react-awesome-reveal";
+import { Fade, Slide } from "react-awesome-reveal";
+import Footer from "../Home/Footer";
 
 
 const Main = () => {
   return (
     <div>
-      <Slide>
+      <Fade>
       <Navbar></Navbar>
-      </Slide>
+      </Fade>
       <Outlet></Outlet>
+      <Footer></Footer>
     </div>
   );
 };

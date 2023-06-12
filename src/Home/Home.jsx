@@ -4,7 +4,8 @@ import PopularClass from './PopularClass';
 import { Fade,  JackInTheBox, Roll, Slide, Zoom } from 'react-awesome-reveal';
 import Instructor from '../Instructor/Instructor';
 import Footer from './Footer';
-import Lottie from 'react-lottie';
+import Lottie from 'lottie-react';
+import wave from '../../src/assets/Lotties/wave.json'
 const Home = () => {
     return (
         <div>
@@ -20,9 +21,11 @@ const Home = () => {
            <Instructor></Instructor>
            </div>
            </Fade>
-            <Slide>
-           <Footer></Footer>
-            </Slide>
+            <div>
+                
+                <Lottie animationData={wave}></Lottie>
+                <hr />
+            </div>
         </div>
     );
 };
