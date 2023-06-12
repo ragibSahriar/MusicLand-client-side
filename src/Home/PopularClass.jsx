@@ -8,7 +8,7 @@ const PopularClass = () => {
     isLoading: loading,
     refetch,
   } = useQuery(["classes"], async () => {
-    const res = await fetch("http://localhost:5000/classes");
+    const res = await fetch("https://music-cloud-server.vercel.app/classes");
     return res.json();
   });
   return (

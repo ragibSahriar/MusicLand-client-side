@@ -3,6 +3,7 @@ import { AuthContext } from "../AuthProvider/Authprovider";
 import Swal from "sweetalert2";
 import axios from "axios";
 import useRoleChange from "../hooks/useRole";
+import { Navigate } from "react-router-dom";
 
 const AllClassSection = ({ classes }) => {
     const {data}= useRoleChange()
@@ -18,7 +19,7 @@ const AllClassSection = ({ classes }) => {
           email: user.email,
         };
     
-        axios.post("http://localhost:5000/classCarts", cartItem)
+        axios.post("https://music-cloud-server.vercel.app/classCarts", cartItem)
           .then((response) => {
             console.log(response.data);
             if (response.data.insertedId) {
@@ -52,7 +53,7 @@ const AllClassSection = ({ classes }) => {
           confirmButtonText: "Login now!",
         }).then((result) => {
           if (result.isConfirmed) {
-            //   navigate("/login", { state: { from: location } });
+              Navigate("/login", { state: { from: location } });
           }
         });
       }

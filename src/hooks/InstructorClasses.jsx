@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 
 const InstructorClasses = () => {
     const { data: classes = [],isLoading: loading, refetch } = useQuery(['classes'], async () => {
-        const res = await fetch('http://localhost:5000/classes');
+        const res = await fetch('https://music-cloud-server.vercel.app/classes');
         return res.json();
       });
       return [classes, loading, refetch]
@@ -15,7 +15,7 @@ export default InstructorClasses;
 
 // const usersData = () => {
 //     const { data: users = [],isLoading: loading, refetch } = useQuery(['users'], async () => {
-//         const res = await fetch('http://localhost:5000/users');
+//         const res = await fetch('https://music-cloud-server.vercel.app/users');
 //         return res.json();
 //       });
 //       return [users, loading, refetch]
@@ -28,7 +28,7 @@ export default InstructorClasses;
    
 //     const fetchAllClasses = async () => {
 //       try {
-//         const response = await fetch('http://localhost:5000/addclass');
+//         const response = await fetch('https://music-cloud-server.vercel.app/addclass');
 //         const data = await response.json();
 //         return data;
 //       } catch (error) {

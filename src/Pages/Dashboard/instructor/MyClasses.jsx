@@ -9,7 +9,7 @@ const MyClasses = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/addClass/myclass/${user?.email}`);
+        const response = await fetch(`https://music-cloud-server.vercel.app/addClass/myclass/${user?.email}`);
         if (!response.ok) {
           throw new Error('Error fetching classes');
         }

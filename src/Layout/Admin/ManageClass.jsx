@@ -29,7 +29,7 @@ const ManageClass = () => {
     event.preventDefault();
     console.log('Submitted text:', textInput);
     if (!classObj || !classObj._id) {
-      console.error("Invalid class object");
+      console.error('Invalid class object');
       return;
     }
     handleFeedback(classObj._id, textInput); // Pass classObj._id to handleFeedback
@@ -39,21 +39,21 @@ const ManageClass = () => {
   const handleFeedback = async (id, feedback) => {
     console.log(id);
     if (!feedback) {
-      alert("Feedback cannot be empty");
+      alert('Feedback cannot be empty');
       return;
     }
     try {
-      await axios.post(`http://localhost:5000/addClass/feedback/${id}`, {
+      await axios.post(`https://music-cloud-server.vercel.app/addClass/feedback/${id}`, {
         feedback,
       });
       refetch(); // Refetch the updated data
     } catch (error) {
-      console.error("Error sending feedback:", error);
+      console.error('Error sending feedback:', error);
     }
   };
 
   const handleApprove = (classObj) => {
-    fetch(`http://localhost:5000/addClass/approved/${classObj._id}`, {
+    fetch(`https://music-cloud-server.vercel.app/addClass/approved/${classObj._id}`, {
       method: 'PATCH',
     })
       .then((res) => res.json())
@@ -66,7 +66,7 @@ const ManageClass = () => {
   };
 
   const handleDeny = (classObj) => {
-    fetch(`http://localhost:5000/addClass/deny/${classObj._id}`, {
+    fetch(`https://music-cloud-server.vercel.app/addClass/deny/${classObj._id}`, {
       method: 'PATCH',
     })
       .then((res) => res.json())
@@ -105,7 +105,7 @@ const ManageClass = () => {
                   <FaTimes className="text-red-500" />
                 </button>
               </>
-              <button className="btn btn-sm btn-primary" onClick={() => openModal(classObj)}>
+              <button className="btn btn-sm btn-ghost bg-zinc-950 text-white" onClick={() => openModal(classObj)}>
                 <FaComments />
                 Feedback
               </button>
@@ -115,9 +115,12 @@ const ManageClass = () => {
       </div>
 
       {isModalOpen && classObj && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h2 className="font-bold">Feedback</h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto">
+          <div className="fixed inset-0 transition-opacity" aria-hidden="true">
+            <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+          </div>
+          <div className="relative bg-white rounded-lg px-4 py-6 w-96">
+            <h2 className="font-bold text-xl mb-4">Feedback</h2>
             <form onSubmit={handleSubmit}>
               <input
                 placeholder="Write your feedback here"
@@ -125,21 +128,25 @@ const ManageClass = () => {
                 id="text-input"
                 value={textInput}
                 onChange={handleTextInputChange}
-                style={{ width: '100%', height: '60px', fontSize: '18px' }}
+                className="w-full h-16 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-zinc-500"
               />
-              <button className="btn bg-green-600" type="submit">
-                Submit
-              </button>
+              <div className="flex justify-end mt-4">
+                <button
+                  className="px-4 py-2 rounded-md text-white bg-green-600 hover:bg-green-500"
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </div>
             </form>
             <button
-              className="px-2 py-1 rounded-full text-white mt-1 bg-red-700"
+              className="absolute top-0 right-0 mt-2 mr-2 px-2 py-1 rounded-full text-white bg-red-700"
               onClick={closeModal}
             >
               X
             </button>
           </div>
-          
-           </div>
+        </div>
       )}
     </div>
   );

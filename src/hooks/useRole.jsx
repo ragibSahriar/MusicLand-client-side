@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 //   const { data = {} } = useQuery({
 //     queryKey: ["role", !!user?.email],
 //     queryFn: async () => {
-//       const res = await fetch(`http://localhost:5000/role?email=${user?.email}`)
+//       const res = await fetch(`https://music-cloud-server.vercel.app/role?email=${user?.email}`)
 
       
 //       return  res.json()
@@ -32,7 +32,7 @@ const useRoleChange = () => {
 
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/role?email=${user?.email}`
+        `https://music-cloud-server.vercel.app/role?email=${user?.email}`
       );
       const result = await res.json();
       console.log(result);

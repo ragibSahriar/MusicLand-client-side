@@ -62,9 +62,6 @@ const Login = () => {
                   <h1 className="text-5xl text-center font-bold text-sky-600">
                     Login
                   </h1>
-    
-                  {/* form ////////////////  */}
-    
                   <form onSubmit={handleLogin}>
                     <div  data-aos="fade-down" className="form-control">
                       <label className="label">

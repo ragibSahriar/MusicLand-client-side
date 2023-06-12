@@ -22,7 +22,7 @@ const AddClass = () => {
     };
     console.log(newData);
     try {
-      const response = await axios.post("http://localhost:5000/addClass", {
+      const response = await axios.post("https://music-cloud-server.vercel.app/addClass", {
         ...newData,
       });
 
